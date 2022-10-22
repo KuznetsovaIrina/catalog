@@ -23,18 +23,10 @@ const langs = [
 const LangPanel = () => {
   const [visible, setVisible] = useState(false);
   const [lang, setLang] = useState("ru");
-  const langWrapperRef = useRef();
 
   const changeLang = (code: string) => {
     setLang(code);
     setVisible(!visible);
-  };
-
-  const handleClick = (e: any) => {
-    if (langWrapperRef.current
-        && !langWrapperRef.current.contains(e.target)) {
-        setVisible(false);
-    }
   };
 
   const handleKeydown = (e: any) => {
@@ -44,16 +36,14 @@ const LangPanel = () => {
   }
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClick);
     document.addEventListener("keydown", handleKeydown);
     return () => {
-      document.removeEventListener("mousedown", handleClick);
       document.removeEventListener("keydown", handleKeydown);
     }
   }, []);
 
   return (
-    <div className={classes.lang} ref={langWrapperRef}>
+    <div className={classes.lang}>
       <button
         className={classes.langCurrent}
         onClick={() => setVisible(!visible)}

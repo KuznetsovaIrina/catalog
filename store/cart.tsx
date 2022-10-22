@@ -12,11 +12,13 @@ class Cart {
 
   add(service: IService, count: number = 1) {
     let index = this.services.findIndex(s => s.id === service.id);
+
+    console.log(service);
     
     if (index === -1) {
       this.services.push({...service, count});
     } else {
-      this.services[index].count = this.services[index].count + count;
+      this.services[index].count = this.services[index].count || 0 + count;
     }
 
     this.count += count;
@@ -30,13 +32,13 @@ class Cart {
   }
 
   addCount(id: number, price: number) {
-    this.services = this.services.map(s => s.id === id ? {...s, count: s.count + 1} : s);
+    this.services = this.services.map(s => s.id === id ? {...s, count: s.count || 0 + 1} : s);
     this.totalPrice += price;
     this.count += 1;
   }
 
   downCount(id: number, price: number) {
-    this.services = this.services.map(s => s.id === id ? {...s, count: s.count - 1} : s);
+    this.services = this.services.map(s => s.id === id ? {...s, count: s.count || 0 - 1} : s);
     this.totalPrice -= price;
     this.count -= 1;
   }

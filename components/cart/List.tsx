@@ -34,7 +34,7 @@ const List = () => {
                 </div>
                 <button
                   className={classes.remove}
-                  onClick={() => cart.remove(s.id, +s.count, +s.price)}
+                  onClick={() => cart.remove(s.id, s.count || 1, +s.price)}
                 >
                   <CloseIcon />
                 </button>
